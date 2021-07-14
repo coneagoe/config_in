@@ -2,12 +2,6 @@
 "    finish
 "endif
 
-augroup config_in_sty
-    au! BufRead,BufNewFile Config.in config_in 
-"    au! BufRead,BufNewFile *.xyzsetfiletype drawing
-    call s:ConfiginFormatting()
-augroup END
-
 function s:ConfiginFormatting()
     setlocal tabstop=8
     setlocal shiftwidth=8
@@ -17,5 +11,12 @@ function s:ConfiginFormatting()
     " strip tailing whitespace
     autocmd BufWritePre <buffer> %s/\s\+$//e
 endfunction
+
+
+augroup config_in_sty
+    au! BufRead,BufNewFile Config.in setfiletype config_in 
+    call s:ConfiginFormatting()
+augroup END
+
 
 command! ConfiginCodingStyle call s:ConfiginFormatting()
